@@ -37,20 +37,26 @@
     }
 
     #screen1::before {
-      conten: '';
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
       background-image: inherit;
       background-size: cover;
       background-position: center;
       filter: blur(4px);
       z-index: 0;
-}
+    }
 
     #screen1 .overlay {
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     #startBtn {
@@ -66,7 +72,7 @@
     }
 
     #screen2 {
-      background-image: url('gambar2.jpg'); /* Ganti dengan nama file gambar background tidak blur */
+      background-image: url('gambar2.jpg'); 
       filter: none;
       flex-direction: column;
       text-align: center;
@@ -78,7 +84,7 @@
     .judul {
       color: #247bc7;
       font-weight: 700;
-      font-size: 20px;
+      font-size: 50px;
       margin-bottom: 20px;
     }
 
@@ -128,6 +134,7 @@
 <div id="screen1">
   <div class="overlay">
     <button id="startBtn">Mulai Baca</button>
+    <img src="gambar-tambahan1.jpg" alt="Ilustrasi" style="margin-top: 20px; max-width: 300px;" />
   </div>
 </div>
 
@@ -144,6 +151,8 @@
     <button class="nav-btn" id="nextBtn" onclick="nextSlide()">>></button>
   </div>
 
+  <img src="gambar-tambahan2.jpg" alt="Ilustrasi Monolog" style="max-width: 300px; margin: 20px 0;" />
+
   <div class="audio-caption">Audio monolog Sasha untuk Andra, silahkan di dengar dengan earphone :)</div>
   <audio controls>
     <source src="Monolog-untuk-Biru.mp3" type="audio/mpeg" />
@@ -152,7 +161,6 @@
 
   <footer>dari Tangan Neji untuk Kaki Taro</footer>
 </div>
-
 
 <script>
   const monolog = [
