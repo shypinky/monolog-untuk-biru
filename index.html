@@ -13,10 +13,9 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    html, body {
+    body, html {
       height: 100%;
       font-size: 16px;
-      overflow-x: hidden;
     }
 
     #screen1, #screen2 {
@@ -27,7 +26,6 @@
       height: 100vh;
       padding: 20px;
       overflow-y: auto;
-      box-sizing: border-box;
     }
 
     #screen1 {
@@ -75,11 +73,13 @@
 
     #screen2 {
       background-image: url('gambar2.jpg');
-      filter: none;
+      background-size: cover;
+      background-position: center;
       display: none;
+      flex-direction: column;
       justify-content: flex-start;
+      align-items: center;
       width: 100%;
-      padding-top: 40px;
     }
 
     .judul {
@@ -87,9 +87,7 @@
       font-weight: 700;
       font-size: 28px;
       margin-bottom: 20px;
-      margin-top: 20px;
       text-align: center;
-      width: 100%;
     }
 
     .slide-container {
@@ -101,7 +99,7 @@
       color: #247bc7;
       font-weight: 500;
       font-size: 16px;
-      transition: opacity 0.5s ease;
+      text-align: center;
     }
 
     .nav-btn {
@@ -121,13 +119,21 @@
       margin-top: 20px;
       font-size: 14px;
       text-align: center;
+      padding: 0 10px;
+    }
+
+    img {
+      max-width: 90%;
+      max-height: 300px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
     }
 
     audio {
-      width: 100%;
-      max-width: 300px;
-      margin: 10px auto;
-      display: block;
+      margin: 10px 0 20px 0;
+      width: 90%;
+      max-width: 400px;
     }
 
     footer {
@@ -135,6 +141,8 @@
       font-style: italic;
       font-weight: 500;
       color: #000;
+      text-align: center;
+      padding: 10px;
     }
 
     @media (max-width: 600px) {
@@ -160,11 +168,6 @@
       .audio-caption {
         font-size: 14px;
       }
-
-      img {
-        max-width: 100%;
-        height: auto;
-      }
     }
   </style>
 </head>
@@ -174,7 +177,7 @@
 <div id="screen1">
   <div class="overlay">
     <button id="startBtn">Mulai Baca</button>
-    <img src="gambar-tambahan1.jpg" alt="Ilustrasi" style="margin-top: 20px; max-width: 300px;" />
+    <img src="gambar-tambahan1.jpg" alt="Ilustrasi" />
   </div>
 </div>
 
@@ -183,7 +186,7 @@
   <div class="judul">UNTUK BIRU YANG MERINDU</div>
 
   <div class="slide-container" id="slideText">
-    <!-- Konten monolog akan dimasukkan lewat JavaScript -->
+    <!-- Konten monolog dari JavaScript -->
   </div>
 
   <div>
@@ -191,9 +194,12 @@
     <button class="nav-btn" id="nextBtn" onclick="nextSlide()">>></button>
   </div>
 
-  <img src="gambar-tambahan2.jpg" alt="Ilustrasi Monolog" style="max-width: 300px; margin: 20px 0;" />
+  <img src="gambar-tambahan2.jpg" alt="Ilustrasi Monolog" />
 
-  <div class="audio-caption">Audio monolog Sasha untuk Andra, silahkan di dengar dengan earphone :)</div>
+  <div class="audio-caption">
+    Audio monolog Sasha untuk Andra, silahkan di dengar dengan earphone :)
+  </div>
+
   <audio controls>
     <source src="Monolog-untuk-Biru.mp3" type="audio/mpeg" />
     Browser Anda tidak mendukung pemutar audio.
