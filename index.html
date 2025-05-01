@@ -15,6 +15,7 @@
 
     body, html {
       height: 100%;
+      font-size: 16px;
     }
 
     #screen1, #screen2 {
@@ -57,15 +58,17 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      padding: 20px;
+      width: 90%;
     }
 
     #startBtn {
       background-color: #247bc7;
       color: white;
-      padding: 14px 28px;
+      padding: 12px 24px;
       border: none;
       border-radius: 6px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 500;
       z-index: 3;
       cursor: pointer;
@@ -84,28 +87,29 @@
     .judul {
       color: #247bc7;
       font-weight: 700;
-      font-size: 50px;
+      font-size: 32px;
       margin-bottom: 20px;
     }
 
     .slide-container {
       background-color: white;
-      max-width: 90%;
-      padding: 30px;
+      max-width: 100%;
+      padding: 20px;
       border-radius: 12px;
       margin-bottom: 20px;
       color: #247bc7;
       font-weight: 500;
       transition: opacity 0.5s ease;
+      font-size: 16px;
     }
 
     .nav-btn {
       background-color: #247bc7;
       color: white;
       border: none;
-      padding: 8px 16px;
+      padding: 8px 14px;
       margin: 10px;
-      font-size: 16px;
+      font-size: 14px;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -114,6 +118,7 @@
       color: #247bc7;
       font-weight: 500;
       margin-top: 20px;
+      font-size: 14px;
     }
 
     footer {
@@ -125,6 +130,37 @@
 
     .hidden {
       display: none;
+    }
+
+    /* Media Query untuk layar kecil */
+    @media (max-width: 600px) {
+      .judul {
+        font-size: 24px;
+      }
+
+      .slide-container {
+        font-size: 14px;
+        padding: 15px;
+      }
+
+      #startBtn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      .nav-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      .audio-caption {
+        font-size: 14px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     }
   </style>
 </head>
