@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monolog untuk Biru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+    }
+
+    #screen1, #screen2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.8s ease;
+    }
+
+    #screen1 {
+      background-image: url('gambar1.jpg'); 
+      z-index: 1;
+    }
+
+    #screen1::before {
+      conten: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: inherit;
+      background-size: cover;
+      background-position: center;
+      filter: blur(4px);
+      z-index: 0;
+}
+
+    #screen1 .overlay {
+      position: relative;
+      z-index: 1;
+    }
+
+    #startBtn {
+      background-color: #247bc7;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: 500;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    #screen2 {
+      background-image: url('gambar2.jpg'); /* Ganti dengan nama file gambar background tidak blur */
+      filter: none;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      z-index: 0;
+      display: none;
+    }
+
+    .judul {
+      color: #247bc7;
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .slide-container {
+      background-color: white;
+      max-width: 90%;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      color: #247bc7;
+      font-weight: 500;
+      transition: opacity 0.5s ease;
+    }
+
+    .nav-btn {
+      background-color: #247bc7;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .audio-caption {
+      color: #247bc7;
+      font-weight: 500;
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-style: italic;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Tampilan Pertama -->
+<div id="screen1">
+  <div class="overlay">
+    <button id="startBtn">Mulai Baca</button>
+  </div>
+</div>
+
+<!-- Tampilan Kedua -->
+<div id="screen2">
+  <div class="judul">UNTUK BIRU YANG MERINDU</div>
+
+  <div class="slide-container" id="slideText">
+    <!-- Konten monolog akan dimasukkan lewat JavaScript -->
+  </div>
+
+  <div>
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()"><<</button>
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()">>></button>
+  </div>
+
+  <div class="audio-caption">Audio monolog Sasha untuk Andra, silahkan di dengar dengan earphone :)</div>
+  <audio controls>
+    <source src="Monolog-untuk-Biru.mp3" type="audio/mpeg" />
+    Browser Anda tidak mendukung pemutar audio.
+  </audio>
+
+  <footer>dari Tangan Neji untuk Kaki Taro</footer>
+</div>
+
+
+<script>
+  const monolog = [
+    `Kamu yang kini duduk dalam diam panjang, aku melihatmu. Aku melihat luka itu, luka yang bahkan dunia pun terlalu kecil untuk memeluknya.`,
+    `Telah sebulan berlalu, sejak mataharimu pulang ke langit. Tiga puluh hari lebih dunia berjalan, tapi kamu diam di tempat yang sama, memeluk kehilangan itu seerat denyut nadimu sendiri.`,
+    `Dia anakmu, sinar kecilmu, kini mengalir dalam biru yang kau pandangi setiap pagi. Ia tak hilang, tidak. Ia hanya memilih membaur dengan sesuatu yang lebih luas, agar ia bisa memelukmu dari segala arah.`,
+    `Aku tahu, kehilanganmu bukan sekadar kehampaan, kehilanganmu adalah reruntuhan seluruh dunia kecilmu. Tapi percayalah, kau tidak sendiri menahan kekangan dunia yang semakin terlilit kuat.`,
+    `Di setiap diam yang membungkammu, aku berbisik tanpa suara: "Aku memegangmu." "Aku di sini."`,
+    `Kamu tak perlu berbicara. Kamu tak perlu tersenyum. Cukup bernafas, itu sudah cukup berani. Karena aku tahu, setiap nafasmu kini mengandung doa, setiap detak jantungmu membawa sepotong nama kecilnya ke surga.`,
+    `Saat kau memandang langit biru itu. Ingatlah, di sana ia tersenyum untukmu. Dan aku, di sini, menunggu kapan pun kamu siap, untuk berjalan perlahan lagi, meski bersama luka.`,
+    `Aku akan duduk di sisimu, dalam bisu, dalam tangis, dalam doa. Hingga pada suatu pagi, kamu akan merasakan mataharimu yang dulu kecil itu, kini telah melebur menjadi langit, memelukmu tanpa henti.`
+  ];
+
+  let currentSlide = 0;
+
+  const screen1 = document.getElementById('screen1');
+  const screen2 = document.getElementById('screen2');
+  const startBtn = document.getElementById('startBtn');
+  const slideText = document.getElementById('slideText');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  startBtn.addEventListener('click', () => {
+    screen1.style.display = 'none';
+    screen2.style.display = 'flex';
+    updateSlide();
+  });
+
+  function updateSlide() {
+    slideText.innerText = monolog[currentSlide];
+    prevBtn.style.display = currentSlide > 0 ? 'inline-block' : 'none';
+    nextBtn.style.display = currentSlide < monolog.length - 1 ? 'inline-block' : 'none';
+  }
+
+  function nextSlide() {
+    if (currentSlide < monolog.length - 1) {
+      currentSlide++;
+      updateSlide();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide();
+    }
+  }
+</script>
+
+</body>
+</html>
